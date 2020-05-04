@@ -1,18 +1,15 @@
-// TODO: importing the store
-// building out routes
-// and using these routes to call your store methods
-// Linking the noteContents in db to this routes.
+//USING ROUTER FRAMEWORK AND LINK TO STORE.JS
 const router = require("express").Router();
-const store = require("./db/store");
+const store = require("../db/store");
 
-// GET "/api/notes" responds with all notes from the database
+// GET NOTES FROM DB
 router.get("/notes", function(req, res) {
   store
     .getNotes()
     .then(notes => res.json(notes))
     .catch(err => res.status(500).json(err));
 });
-
+//POST NOTES IN DB
 router.post("/notes", (req, res) => {
   store
     .addNote(req.body)
@@ -20,7 +17,7 @@ router.post("/notes", (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-// DELETE "/api/notes" deletes the note with an id equal to req.params.id
+// DELETE FUNCTIONS
 router.delete("/notes/:id", function(req, res) {
   store
     .removeNote(req.params.id)
